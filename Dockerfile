@@ -1,10 +1,7 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 # Update
 RUN apk update
-
-# PHP 7.4
-RUN apk add --no-cache  --repository http://dl-cdn.alpinelinux.org/alpine/edge/community php
 
 # Install dependencies
 RUN apk add nginx
@@ -67,6 +64,9 @@ COPY config/crontab /var/www/crontab
 
 # Copy supervisord.conf
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Copy source
+COPY artisan /www/artisan
 
 EXPOSE 80
 
